@@ -1,0 +1,13 @@
+---
+# common properties for openstack
+mysql_user: root
+mysql_passwd: mysql
+
+rabbit_user: openstack
+rabbit_passwd: rabbit
+
+############################
+keystone_user: keystone
+keystone_passwd: keystone
+
+    

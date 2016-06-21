@@ -1,0 +1,5 @@
+---
+# common properties for keystone
+
+keystone_user: keystone
+keystone_passwd: keystone
