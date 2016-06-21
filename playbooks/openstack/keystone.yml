@@ -2,22 +2,31 @@
 # hosts: controller
 - hosts: '{{ hosts }}'
   remote_user: '{{ user }}'
+  
   vars_files:
     - properties.yml
 
   vars:
     http_port: 80
-    
+
+#     
   tasks:
     - name: include default variables for keystone
       include_vars: keystone_properties.yml
 
-    - name: this is just a placeholder
+    - name: get temporary token
+      command: openssl rand -hex 10
+      register: tmp_token
+    
+    - name: echo keystone_user
       command: /bin/echo {{ keystone_user }}
+
+
 
     - name: nodename
       command: /bin/echo {{ ansible_nodename }}
 
     - name: hostname
       command: /bin/echo {{ ansible_hostname }}
-    
+
+...    

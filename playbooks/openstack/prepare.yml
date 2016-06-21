@@ -1,0 +1,78 @@
+---
+- hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  
+  vars_files:
+    - properties.yml
+
+  vars:
+    pkg: chrony
+     
+  tasks:
+    - name: install NTP server
+      apt: name={{ pkg }} state=present
+
+    - name: update configs for NTP server 
+      lineinfile:
+        dest : /etc/{{ pkg }}/{{ pkg }}.conf
+        line : "server {{ item }} iburst" 
+        state : present
+      with_items: "{{ ntp_std_servers }}"
+          
+    - name: restart NTP server
+      service: name={{ pkg }} state=restarted
+
+    - name: install software-properties-common
+      apt: name=software-properties-common
+
+    - name: enable the OpenStack repository
+      command: add-apt-repository 'cloud-archive:{{ openstack_release }}' 
+      
+    - name: upgrade the packages 
+      command: apt-get update 
+      
+    - name: upgrade the packages dist       
+      command: apt-get dist-upgrade
+
+    - name: install the OpenStack client
+      apt: name=python-openstackclient 
+
+- hosts: '{{ ntp_controller_servers }}'
+  remote_user: '{{ user }}'
+  
+  vars_files:
+    - properties.yml
+
+  vars:
+    pkg: chrony
+     
+  tasks:
+    - name: install NTP server
+      apt: name={{ pkg }} state=present
+
+    - name: update configs for NTP server 
+      lineinfile:
+        dest : /etc/{{ pkg }}/{{ pkg }}.conf
+        line : "server {{ ntp_controller_server }} iburst" 
+        state : present
+      with_items: "{{ ntp_controller_servers }}"
+          
+    - name: restart NTP server
+      service: name={{ pkg }} state=restarted
+
+    - name: install software-properties-common
+      apt: name=software-properties-common
+
+    - name: enable the OpenStack repository
+      command: add-apt-repository cloud-archive:{{ openstack_release }} 
+      
+    - name: upgrade the packages on your host
+      command: apt-get update 
+      
+    - name: upgrade the packages on your host
+      command: apt-get dist-upgrade
+
+    - name: install the openStack client
+      apt: name=python-openstackclient
+            
+...    

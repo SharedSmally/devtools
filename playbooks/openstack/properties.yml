@@ -1,13 +1,123 @@
 ---
 # common properties for openstack
+
+##############################
+openstack_release: mitaka
+
+##############################
+# standard NTP servers: http://www.pool.ntp.org/en/
+#  server 0.north-america.pool.ntp.org
+#  server 1.north-america.pool.ntp.org
+#  server 2.north-america.pool.ntp.org
+#  server 3.north-america.pool.ntp.org
+ntp_std_zone: north-america
+ntp_std_servers:
+ - 0.{{ ntp_std_zone }}.pool.ntp.org
+ - 1.{{ ntp_std_zone }}.pool.ntp.org
+ - 2.{{ ntp_std_zone }}.pool.ntp.org
+ - 3.{{ ntp_std_zone }}.pool.ntp.org
+
+ntp_controller_server: controller 
+ntp_controller_servers: controller
+
+##############################
 mysql_user: root
 mysql_passwd: mysql
 
+##############################
+# RABBIT_PASS Password of user guest of RabbitMQ
 rabbit_user: openstack
 rabbit_passwd: rabbit
 
-############################
+##############################
+#ADMIN_PASS  Password of user admin
+admin_user: admin
+admin_role: admin
+admin_project: service
+admin_domain: service
+
+##############################
+#DEMO_PASS   Password of user demo
+user_users: admin
+user_role: user
+user_project: demo
+user_domain: demo
+
+##############################
+#KEYSTONE_DBPASS Database password of Identity service
 keystone_user: keystone
 keystone_passwd: keystone
+keystone_dbpasswd: keystone
+keystone_port:
+keystone_adm_url: 
+keystone_pub_url: 
+keystone_int_url:
 
-    
+##############################
+#NOVA_DBPASS Database password for Compute service
+#NOVA_PASS   Password of Compute service user nova
+nova_user: nova
+nova_passwd: nova
+nova_dbpasswd: nova
+nova_port:
+nova_adm_url: 
+nova_pub_url: 
+nova_int_url: 
+
+##############################
+#NEUTRON_DBPASS  Database password for the Networking service
+#NEUTRON_PASS    Password of Networking service user neutron
+neutron_user: neutron
+neutron_passwd: neutron
+neutron_dbpasswd: neutron
+
+##############################
+#CINDER_DBPASS   Database password for the Block Storage service
+#CINDER_PASS Password of Block Storage service user cinder
+cinder_user: cinder
+cinder_passwd: cinder
+cinder_dbpasswd: cinder
+
+##############################
+#GLANCE_DBPASS   Database password for Image service
+#GLANCE_PASS Password of Image service user glance
+glance_user: glance
+glance_passwd: glance
+glance_dbpasswd: glance
+
+##############################
+#SWIFT_PASS  Password of Object Storage service user swift
+swift_user: swift
+swift_passwd: swift
+swift_dbpasswd: swift
+
+
+##############################
+#DASH_DBPASS Database password for the dashboard
+dash_user: dash
+dash_passwd: dash
+dash_dbpasswd: dash
+
+##############################
+#CEILOMETER_DBPASS   Database password for the Telemetry service
+#CEILOMETER_PASS Password of Telemetry service user ceilometer
+ceilometer_user: ceilometer
+ceilometer_passwd: ceilometer
+ceilometer_dbpasswd: ceilometer
+
+##############################
+#HEAT_DBPASS Database password for the Orchestration service
+#HEAT_DOMAIN_PASS    Password of Orchestration domain
+#HEAT_PASS   Password of Orchestration service user heat
+heat_user: heat
+heat_passwd: heat
+heat_dbpasswd: heat
+
+##############################
+
+
+
+
+
+
+...    
